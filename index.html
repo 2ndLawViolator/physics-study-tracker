@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Physics Self-Study Tracker</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1a18">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Physics Tracker">
+<link rel="apple-touch-icon" href="icon-192.png">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -147,12 +154,6 @@ textarea{width:100%;min-height:60px;font-size:12px;font-family:var(--font);color
 textarea::placeholder{color:var(--tt);}
 textarea:focus{outline:none;border-color:var(--blue);}
 .footer-note{text-align:center;margin-top:1.5rem;font-size:12px;color:var(--tt);}
-.ans-toggle{margin-top:8px;font-size:11px;padding:4px 10px;border-radius:var(--rmd);border:0.5px solid var(--bm);background:transparent;color:var(--tt);cursor:pointer;font-family:var(--font);}
-.ans-toggle:hover{background:var(--bg-s);color:var(--ts);}
-.ans-box{display:none;margin-top:8px;background:var(--bg-s);border-radius:var(--rmd);padding:10px 12px;border-left:3px solid var(--green);}
-.ans-box.open{display:block;}
-.ans-lbl{font-size:10px;font-weight:500;color:var(--green-t);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:8px;}
-.ans-item{font-size:12px;color:var(--tp);line-height:1.6;margin-bottom:3px;font-family:monospace;}
 </style>
 </head>
 <body>
@@ -250,8 +251,8 @@ const W=[
       {id:'w1m3',t:'Thomas 2.4: One-sided limits',s:['Read section, work Examples 1–4','Exercises 2.4: #1–12']},
     ],
     phys:[
-      {id:'w1p1',t:'UP Ch 1: Units, Physical Quantities, and Vectors',s:['Read Ch 1 fully','1.4, 1.6, 1.9 — unit conversions and density','1.13, 1.14 — significant figures and percent error','1.16, 1.17 — order-of-magnitude estimates','1.24, 1.28, 1.31 — vector components and resultants','1.40, 1.43, 1.47 — scalar and vector products'],ans:['1.4: 1.93×10⁴ kg/m³','1.6: (a) 88.0 ft/s  (b) 9.80 m/s²  (c) 1000 kg/m³','1.9: r = 9.02 cm','1.13: 0.45% error','1.14: (a) 22/7 accurate to 0.04%  (b) 355/113 accurate to 0.000008%','1.16: ~3×10⁸ gal/day (order of magnitude)','1.17: ~$8×10⁸ (order of magnitude)','1.24: (a) 333°  (b) 26.6°  (c) 153°  (d) 207°','1.28: 7.65 km at 40° E of N','1.31: 2.81 km at 38.5° W of N','1.40: (a) A·B = 6.00  (b) 82.1°','1.43: (a) 165°  (b) 28.1°  (c) 90.0°','1.47: B = 2.0 m in −y direction']},
-      {id:'w1p2',t:'UP Ch 2: Motion Along a Straight Line',s:['Read 2.1–2.4 (velocity, acceleration, free fall)','2.3, 2.5 — average speed vs. average velocity','2.7, 2.13 — instantaneous velocity and acceleration (CALC)','2.19, 2.22 — constant acceleration problems','2.31, 2.38 — free fall basics','2.43, 2.47 — free fall with direction changes','2.55, 2.62 — challenge: earthquake waves and train collision'],ans:['2.3: extra time = 55.0 min','2.5: (a) avg velocity = 0.313 m/s east  (b) avg speed = 1.56 m/s','2.7: (a) 12.0 m/s  (b) v(0)=0, v(5)=15.0, v(10)=12.0 m/s  (c) t=13.3 s','2.13: (a) x₀=50 cm, v₀=2.00 cm/s, a=−0.125 cm/s²  (b) t=16.0 s  (c) t=32.0 s  (d) t=6.2 s and 25.8 s (+10 cm), t=36.4 s (−10 cm)','2.19: v₀=8.33 m/s, a=1.11 m/s²','2.22: (a) ~2 s, a≈8 m/s²  (b) ~2 s more  (c) ~11 m more','2.31: (a) v₀=2.94 m/s  (b) 0.600 s in air','2.38: (a) h=17.7 m  (b) v=18.6 m/s','2.43: h_max=15.9 m','2.47: v at water = 37.6 m/s','2.55: d=250 km','2.62: Yes, collision at x≈538 m at t≈22.5 s']},
+      {id:'w1p1',t:'UP Ch 1: Units, Physical Quantities, and Vectors',s:['Read Ch 1 fully','Exercises: 1.1, 1.3, 1.5, 1.7, 1.9 (units)','Exercises: 1.15, 1.17, 1.19 (vectors, components)']},
+      {id:'w1p2',t:'UP Ch 2: Motion Along a Straight Line',s:['Read 2.1–2.4 (velocity, acceleration, free fall)','Exercises: 2.1, 2.3, 2.7 (displacement, velocity)','Exercises: 2.11, 2.13, 2.17 (acceleration, free fall)','Exercises: 2.25, 2.27 (mixed)']},
     ],
     conn:'Velocity is dx/dt and acceleration is dv/dt — these are limits. Work Ch 2 problems by computing slopes of x(t) curves using the limit definition from Thomas 2.1, not just memorizing kinematic equations.',
     resources:[
@@ -270,8 +271,8 @@ const W=[
       {id:'w2m3',t:'Thomas 3.3: Differentiation rules (power, sum, product, quotient)',s:['Read 3.3, work all Examples','Exercises 3.3: #1–20 (power and sum rules)','Exercises 3.3: #21–36 (product and quotient rules)']},
     ],
     phys:[
-      {id:'w2p1',t:'UP Ch 3: Motion in Two or Three Dimensions',s:['Read 3.1–3.5 (vectors, projectiles, circular motion, relative velocity)','3.3, 3.7 — velocity and acceleration vectors (CALC)','3.11, 3.12 — projectile basics','3.17, 3.21 — projectile at an angle, launch from height','3.27, 3.31 — uniform circular motion and radial acceleration','3.37, 3.41 — relative velocity in 2D','3.57, 3.63 — challenge: grasshopper leap and motorcycle river jump'],ans:['3.3: (a) v_avg=7.07 cm/s at 45°  (b) v(0)=5.0ĵ, v(1)=5î+5ĵ, v(2)=10î+5ĵ cm/s','3.7: at t=2s: v=(2.4,−4.8) m/s, |v|=5.37 m/s at −63.4°; a=(0,−2.4) m/s²','3.11: h=35.7 m; Milada lands 2.56 m from base','3.12: (a) 1.22 s  (b) 7.35 m  (c) 2.45 s  (d) 49.0 m','3.17: (a) t=0.68 s and 2.99 s  (b) vₓ=24.0 m/s; vᵧ=±11.3 m/s  (c) 30.0 m/s at 36.9° below horizontal','3.21: (a) 13.6 m above roof  (b) 34.6 m/s  (c) 103 m from base','3.27: a_rad=52.8 m/s²','3.31: (a)&(b) a=2.57 m/s² (toward center)  (c) T=14.7 s','3.37: v_canoe/river=0.357 m/s at 52.5° S of W','3.41: (a) 4.65 m/s at 25.5° S of E  (b) 119 s  (c) 238 m south','3.57: (a) v₀=3.16 m/s  (b) cliff height=6.74 cm','3.63: (a) v₀=17.8 m/s  (b) lands 28.4 m from ramp (in the river)']},
-      {id:'w2p2',t:'UP Ch 4: Newton\'s Laws of Motion',s:['Read 4.1–4.6 (Newton\'s 1st, 2nd, 3rd laws, free-body diagrams)','4.1, 4.5 — finding resultant forces','4.7, 4.10, 4.12 — applying F=ma directly','4.16, 4.19 — mass vs. weight on other planets','4.22, 4.23 — Newton\'s 3rd law pairs','4.28, 4.34 — free-body diagrams with rope tension','4.37, 4.45 — connected objects and block systems'],ans:['4.1: R=494 N at 31.7° from Rover\'s rope','4.5: Rₓ=−8.10 N, Rᵧ=+3.00 N, |R|=8.64 N','4.7: friction = 46.7 N','4.10: (a) m=90.9 kg  (b) 22.0 m','4.12: (a) 0.431 m/s²  (b) 21.5 m  (c) 4.31 m/s','4.16: (a) g_moon=1.81 m/s²  (b) mass=1.79 kg (unchanged)','4.19: (a) 4.49 kg  (b) mass=4.49 kg, weight=8.13 N on Io','4.22: 1600 N (Newton\'s 3rd law)','4.23: a=10.0 m/s², force on B=50.0 N','4.28: (a) t=0.743 ms  (b) F=848 N','4.34: a_A=1.80 m/s² (same as B, friction from B accelerates A)','4.37: (a) 2.50 m/s²  (b) T=10.0 N  (c)&(d) F=25.0 N','4.45: (a) mB=4.34 kg  (b) mA=3.89 kg']},
+      {id:'w2p1',t:'UP Ch 3: Motion in Two or Three Dimensions',s:['Read 3.1–3.3 (position, velocity, acceleration in 2D)','Exercises: 3.1, 3.3, 3.5 (vectors in 2D)','Exercises: 3.9, 3.11, 3.13 (projectile motion)','Exercises: 3.19, 3.21 (uniform circular motion)']},
+      {id:'w2p2',t:'UP Ch 4: Newton\'s Laws of Motion',s:['Read 4.1–4.3 (Newton\'s 1st, 2nd, 3rd laws)','Exercises: 4.1, 4.3 (identify forces)','Exercises: 4.7, 4.9, 4.11 (applying F=ma)']},
     ],
     conn:'Circular motion requires sin and cos functions of time; their derivatives give velocity components. Try deriving v = rω from x = r·cos(ωt) using Thomas 3.3\'s differentiation rules. Also: projectile acceleration d²y/dt² = −g is just the second derivative of position.',
     resources:[
@@ -291,8 +292,8 @@ const W=[
       {id:'w3m3',t:'Thomas 3.7: Implicit differentiation',s:['Read 3.7, work Examples 1–4','Exercises 3.7: #1–16 (implicit differentiation)']},
     ],
     phys:[
-      {id:'w3p1',t:'UP Ch 5: Applying Newton\'s Laws',s:['Read 5.1–5.4 (equilibrium, friction, circular dynamics)','5.3, 5.6, 5.7 — equilibrium with ropes, cables, and pulleys','5.9, 5.15 — inclines and Atwood machines','5.24, 5.27 — static and kinetic friction coefficients','5.30, 5.34 — friction on inclines, multi-block systems','5.43, 5.48 — circular motion: string tension and banked curves','5.77, 5.90 — challenge: incline + hanging block and two-incline system'],ans:['5.3: T_max=990 N (top), T_min=735 N (bottom), T(¾ up)=799 N','5.6: T_B=46,300 N; T_A=29,800 N','5.7: T₁=0.897w (upper left at 45°); T₂=0.732w (upper right at 30°)','5.9: (a) 574 N parallel to incline  (b) 607 N parallel to floor','5.15: (a) a=2.96 m/s² upward for bricks  (b) T=191 N','5.24: μₛ=0.556, μₖ=0.444','5.27: (a) μₛ=0.710, μₖ=0.472  (b) F=258 N  (c) 51.7 N; 4.96 m/s²','5.30: (a) a=−9.33 m/s² (decelerates)  (b) slides down at 2.19 m/s²','5.34: (a) μₖ=0.556  (b) a=−2.13 m/s² (B decelerates)','5.43: v_max=8.22 m/s','5.48: (a) μₛ_min=0.375  (b) v_max=14.4 m/s','5.77: (a) m₂=m₁(sinα+μₖcosα)  (b) m₂=m₁(sinα−μₖcosα)  (c) m₁(sinα−μₛcosα) ≤ m₂ ≤ m₁(sinα+μₛcosα)','5.90: (a) 100 kg side goes down  (b) a=0.65 m/s²  (c) T=425 N']},
-      {id:'w3p2',t:'UP Ch 6: Work and Kinetic Energy',s:['Read 6.1–6.4 (work, work-energy theorem, varying forces, power)','6.1, 6.3, 6.6 — work done by constant forces','6.10, 6.12 — work done going up a ramp (multiple forces)','6.22, 6.24 — work-energy theorem to find speed','6.32, 6.37 — work done by a spring','6.41, 6.43 — work done by a varying force (graph/integral)','6.46, 6.54 — power calculations'],ans:['6.1: W_push=3.60 J, W_friction=−0.900 J, W_normal=0, W_gravity=0, W_net=2.70 J','6.3: (a) F=73.5 N  (b) W_F=331 J  (c) W_friction=−331 J  (d) W_normal=W_gravity=0  (e) W_net=0','6.6: W_total=2.62×10⁹ J','6.10: (a) W_fric=−56.6 J  (b) W_grav=+188 J  (c) 0  (d) W_net=131 J','6.12: (a) W_friction=+324 J (belt drags box up)  (b) W_gravity=−324 J  (c) 0','6.22: (a) d=5.80 m  (b) v=3.53 m/s  (c) h=7.35 m','6.24: (a) v₀=30.3 m/s  (b) h_max=46.9 m','6.32: (a) k=26,700 N/m  (b) F=800 N  (c) W=21.3 J, F=1070 N','6.37: max compression=8.49 cm','6.41: (a) 6.0 J  (b) 0 J  (c) −4.0 J  (d) 2.0 J  (e) −2.0 J','6.43: (a) v=2.84 m/s  (b) v=2.40 m/s','6.46: P=378 W','6.54: max 28 passengers']},
+      {id:'w3p1',t:'UP Ch 5: Applying Newton\'s Laws',s:['Read 5.1–5.3 (friction, tension, circular dynamics)','Exercises: 5.1, 5.3, 5.5 (friction problems)','Exercises: 5.9, 5.11, 5.13 (inclines)','Exercises: 5.21, 5.23 (circular motion with forces)']},
+      {id:'w3p2',t:'UP Ch 6: Work and Kinetic Energy',s:['Read 6.1–6.3 (work, work-energy theorem)','Exercises: 6.1, 6.3, 6.5 (work by constant force)','Exercises: 6.9, 6.11 (work-energy theorem)']},
     ],
     conn:'The chain rule is critical for physics: if position x = f(g(t)), velocity dx/dt uses the chain rule automatically. Also, implicit differentiation lets you differentiate constraint equations like x² + y² = r² — exactly what you use in related-rates problems from mechanics.',
     resources:[
@@ -311,8 +312,8 @@ const W=[
       {id:'w4m3',t:'Thomas 5.5: Indefinite integrals and substitution',s:['Read 5.5, work all Examples','Exercises 5.5: #1–20 (basic antiderivatives)','Exercises 5.5: #21–38 (u-substitution)']},
     ],
     phys:[
-      {id:'w4p1',t:'UP Ch 7: Potential Energy and Energy Conservation',s:['Read 7.1–7.5 (conservative forces, PE, energy diagrams)','7.1, 7.5 — gravitational PE and energy at different heights','7.9, 7.11 — normal force from a bowl/loop using energy','7.14, 7.19 — spring PE and launch problems','7.24, 7.29 — energy conservation with friction','7.31, 7.35 — force from potential energy (CALC)','7.41, 7.45 — roller coaster and multi-stage energy problems'],ans:['7.1: (a) ΔU=+661,500 J  (b) ΔU=−771,750 J','7.5: v=24.0 m/s (same for both angles — energy depends only on height)','7.9: (a) W_normal=0, W_gravity=0.980 J  (b) v=2.76 m/s  (d) N=5.00 N','7.11: W_friction=−5440 J','7.14: k=2205 N/m; total length=21.5 cm','7.19: (a) x=5.48 cm  (b) max compression=3.92 cm','7.24: v=0.335 m/s','7.29: (a) v=8.16 m/s  (b) ΔU_internal=766 J','7.31: F=1.29 N in +x direction','7.35: (a) F=−12a/r¹³+6b/r⁷  (b) r_eq=(2a/b)^(1/6), stable  (c) E_dissoc=b²/4a','7.41: (a) v_B=22.1 m/s  (b) N=46,300 N','7.45: (a) v_B=19.9 m/s  (b) x_max=3.87 m  (c) stays put (spring force < static friction)']},
-      {id:'w4p2',t:'UP Ch 8: Momentum, Impulse, and Collisions',s:['Read 8.1–8.6 (momentum, impulse, collisions, center of mass, rockets)','8.1, 8.5 — momentum calculations','8.7, 8.10 — impulse and average force','8.16, 8.20 — conservation of momentum in 1D','8.27, 8.30 — 2D momentum conservation','8.31, 8.36 — completely inelastic collisions','8.43, 8.47 — elastic collisions','8.52, 8.55 — center of mass'],ans:['8.1: p=1.20×10⁵ kg·m/s; SUV needs 60.0 m/s (same p) or 26.8 m/s (same KE)','8.5: p_net=22.5 kg·m/s south; KE_total=838 J','8.7: J=1.125 N·s; F_avg=563 N; weight contribution negligible','8.10: Fₓ=7680 N, Fᵧ=2280 N','8.16: astronaut recoils at 0.105 m/s opposite to throw','8.20: (a) 0.0850 m/s  (b) 0.154 m/s','8.27: (a) Daniel: 7.20 m/s at 38° below initial direction  (b) ΔKE=−678 J','8.30: (a) vA=29.3 m/s, vB=20.7 m/s  (b) 19.6% of KE lost','8.31: v=0.306 m/s south','8.36: (a) 6.44 m/s east  (b) truck needs 2.49 m/s east','8.43: (a) h=0.0294 m  (b) KE_bullet=866 J  (c) KE_after=1.73 J','8.47: (a) v_cm=0.500 m/s, spring stores 3.00 J  (b) vA=−1.00 m/s, vB=+1.00 m/s','8.52: x_cm=7.42×10⁸ m from Sun\'s center (just outside the Sun)','8.55: h_cm=0.488 m above floor']},
+      {id:'w4p1',t:'UP Ch 7: Potential Energy and Energy Conservation',s:['Read 7.1–7.4 (conservative forces, PE, conservation)','Exercises: 7.1, 7.3, 7.5 (gravitational PE)','Exercises: 7.9, 7.11 (spring PE)','Exercises: 7.15, 7.17, 7.19 (conservation of energy)']},
+      {id:'w4p2',t:'UP Ch 8: Momentum, Impulse, and Collisions',s:['Read 8.1–8.3 (momentum, impulse, collisions)','Exercises: 8.1, 8.3, 8.5 (impulse-momentum)','Exercises: 8.11, 8.13, 8.15 (conservation of momentum)','Exercises: 8.19, 8.21 (elastic/inelastic collisions)']},
     ],
     conn:'W = ∫F·dx is a direct application of the definite integral. The work-energy theorem is just the FTC applied to Newton\'s 2nd law: ∫F dx = ∫ma dx = m∫(dv/dt)dx = ∫mv dv = ΔKE. Work both Ch 7 energy problems and Thomas 5.4 integrals this week — they are the same operation.',
     resources:[
@@ -608,12 +609,6 @@ function openTracker(bn){
       const chk=S[t.id+'_d']?'checked':'',dc=S[t.id+'_d']?'done':'';
       pH+=`<div class="task-row"><input type="checkbox" id="c-${t.id}" ${chk} onchange="chk('${t.id}',this)"><label id="l-${t.id}" class="task-text ${dc}" for="c-${t.id}">${t.t}</label></div>`;
       t.s.forEach(s=>{pH+=`<div class="sub-item">→ ${s}</div>`;});
-      if(t.ans&&t.ans.length){
-        pH+=`<button class="ans-toggle" onclick="togAns('ans-${t.id}',this)">Show answers ▾</button>`;
-        pH+=`<div class="ans-box" id="ans-${t.id}"><div class="ans-lbl">Answer key</div>`;
-        t.ans.forEach(a=>{pH+=`<div class="ans-item">${a}</div>`;});
-        pH+=`</div>`;
-      }
     });
     const noteVal=(S['n-'+w.id]||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 
@@ -660,12 +655,6 @@ function tog(wid){
   document.getElementById('chev-'+wid).textContent=open?'▼':'▶';
 }
 
-function togAns(id,btn){
-  const box=document.getElementById(id);
-  const open=box.classList.toggle('open');
-  btn.textContent=open?'Hide answers ▴':'Show answers ▾';
-}
-
 function chk(id,el){
   if(!S.start)S.start=new Date().toISOString();
   S[id+'_d']=el.checked;
@@ -680,6 +669,15 @@ function chk(id,el){
 function note(wid,val){S['n-'+wid]=val;save();}
 
 load();updateUI();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('SW registered:', reg.scope))
+      .catch(err => console.log('SW registration failed:', err));
+  });
+}
 </script>
 </body>
 </html>
